@@ -53,6 +53,7 @@
 	  "firefox"
 	  "iina"
 	  "the-unarchiver"
+	  "spotify"
 	];
 	taps = [
 	];
