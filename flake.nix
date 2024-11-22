@@ -34,6 +34,11 @@
 	  pkgs.alacritty
         ];
 
+  	fonts.packages = with pkgs; [
+    	  (nerdfonts.override {fonts = ["Meslo" "JetBrainsMono"];})
+    	  roboto
+  	];
+
       homebrew = {
         enable = true;
    	onActivation = {
@@ -54,8 +59,11 @@
 	  "iina"
 	  "the-unarchiver"
 	  "spotify"
+	  "nikitabobko/tap/aerospace"
+	  "anki"
 	];
 	taps = [
+	  "nikitabobko/tap"
 	];
 	masApps = {
 	};
