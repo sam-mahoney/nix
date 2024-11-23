@@ -61,6 +61,7 @@
 	  "spotify"
 	  "nikitabobko/tap/aerospace"
 	  "anki"
+	  "balenaetcher"
 	];
 	taps = [
 	  "nikitabobko/tap"
