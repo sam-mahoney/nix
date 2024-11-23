@@ -49,6 +49,7 @@
 	};
       	brews = [
 	  "mas"
+	  "wimlib"
 	];
 	casks = [
 	  "1password"
