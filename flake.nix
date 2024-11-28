@@ -32,6 +32,7 @@
 	  pkgs.tldr
 	  # gui apps
 	  pkgs.alacritty
+	  pkgs.vscode
         ];
 
   	fonts.packages = with pkgs; [
