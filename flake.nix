@@ -30,6 +30,8 @@
   	  pkgs.gnupg
 	  pkgs.ripgrep
 	  pkgs.tldr
+	  # python dev tools
+	  pkgs.poetry
 	  # gui apps
 	  pkgs.alacritty
 	  pkgs.vscode
