@@ -35,6 +35,7 @@
 	  # gui apps
 	  pkgs.alacritty
 	  pkgs.vscode
+	  pkgs.tor
         ];
 
   	fonts.packages = with pkgs; [
@@ -66,6 +67,7 @@
 	  "nikitabobko/tap/aerospace"
 	  "anki"
 	  "balenaetcher"
+	  "cold-turkey-blocker"
 	];
 	taps = [
 	  "nikitabobko/tap"
