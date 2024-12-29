@@ -1,5 +1,5 @@
 {
-  description = "Sam's nix-darwin system flake";
+  description = "halcyon nix-darwin flake";
  
   inputs = {
     # I had to pin darwin as it was breaking my builds
@@ -159,9 +159,10 @@
     };
   in
   {
+    # Halcyon: mbp16-m3max
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#mbpro16
-    darwinConfigurations."mbpro16" = nix-darwin.lib.darwinSystem {
+    # $ darwin-rebuild build --flake .#halcyon
+    darwinConfigurations."halcyon" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
 
