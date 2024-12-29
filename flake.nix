@@ -1,172 +1,138 @@
 {
-  description = "halcyon nix-darwin flake";
+  description = "Foundry: flake to configure nix-darwin & NixOS";
  
   inputs = {
-    # I had to pin darwin as it was breaking my builds
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable }:
-  let
-    # configuration is a fn which defines the system configuration 
-    configuration = { pkgs, config, ... }: {
+    # nixpkgs
+    # -------
+    # nixpkgs-<version>-darwin : stable branch, specifically for darwin systems
+    # nixos-<version>          : stable branch, mixed environments (NixOS & darwin)
+    # nixpkgs-unstable         : less stable, cutting-edge branch
 
-      nixpkgs.config.allowUnfree = true;
+    # https://discourse.nixos.org/t/differences-between-nix-channels/13998
+    
+    # NOTE as of 29/12/2024, 24.11 is the latest release
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-	  pkgs.vim
-	  pkgs.neovim
-	  pkgs.fzf
-	  pkgs.tmux
-	  pkgs.mkalias
-	  pkgs.gh
-	  pkgs.git
-  	  pkgs.gnupg
-	  pkgs.ripgrep
-	  pkgs.tldr
-	  # python dev tools
-	  pkgs.poetry
-	  # gui apps
-	  pkgs.alacritty
-	  pkgs.vscode
-	  pkgs.tor
-        ];
-
-  	fonts.packages = with pkgs; [
-    	  (nerdfonts.override {fonts = ["Meslo" "JetBrainsMono"];})
-    	  roboto
-  	];
-
-      homebrew = {
-        enable = true;
-   	onActivation = {
-	  cleanup = "zap";
-	  # Builds will NOT be idempotent due to these options - but better qol
-	  autoUpdate = true; # Auto-update Homebrew and all formulae
-	  upgrade = true; # upgrade outdated formulae & Mac App Store
-	};
-      	brews = [
-	  "mas"
-	  "wimlib"
-	];
-	casks = [
-	  "1password"
-	  "hammerspoon"
-	  "logseq"
-	  "notion"
-	  "firefox"
-	  "iina"
-	  "the-unarchiver"
-	  "spotify"
-	  "nikitabobko/tap/aerospace"
-	  "anki"
-	  "balenaetcher"
-	  "cold-turkey-blocker"
-	];
-	taps = [
-	  "nikitabobko/tap"
-	];
-	masApps = {
-	};
-      };
-
-      # MacOS settings
-      system.defaults = {
-        dock = {
-          autohide = true;
-	  autohide-delay = 0.1;
-	  orientation = "left";
-	  show-process-indicators = false;
-	  show-recents = false;
-	  tilesize = 56;
-	  # static-only = true;
-	  # Define persistent apps in the dock as a list of strings (path)
-	  # persistent-apps = [];
-	};
-
-	finder = {
-	  AppleShowAllExtensions = true;
-	  ShowPathbar = true;
-	  FXEnableExtensionChangeWarning = false;
-	};
-	
-	trackpad.TrackpadRightClick = true;	
-	WindowManager.EnableStandardClickToShowDesktop = false;
-	
-      };
      
-      security.pam.enableSudoTouchIdAuth = true;
-
-      # https://github.com/elliottminns/dotfiles/blob/main/nix/darwin/flake.nix#L110C1-L128C12	
-      system.activationScripts.applications.text = let
-        env = pkgs.buildEnv {
-          name = "system-applications";
-          paths = config.environment.systemPackages;
-          pathsToLink = "/Applications";
-        };
-      in
-        pkgs.lib.mkForce ''
-          # Set up applications.
-          echo "setting up /Applications..." >&2
-          rm -rf /Applications/Nix\ Apps
-          mkdir -p /Applications/Nix\ Apps
-          find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-          while read -r src; do
-            app_name=$(basename "$src")
-            echo "copying $src" >&2
-            ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-          done
-        '';	
-
-
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
-
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Create /etc/zshrc that loads nix-darwin env
-      programs.zsh = {
-      	enable = true;
-	enableCompletion = true;
-        enableFzfCompletion = true;
-	enableFzfHistory = true;
-	enableSyntaxHighlighting = true;
-      };
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 5;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-
-      users.users.mahoney = {
-	name = "mahoney";
-	home = "/Users/mahoney";
-      };
-
+    # NOTE `inputs.nixpkgs.follows` allows us to reuse an already defined input
+    darwin = {
+	url = "github:LnL7/nix-darwin";
+	inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-  in
-  {
-    # Halcyon: mbp16-m3max
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#halcyon
-    darwinConfigurations."halcyon" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+  
+    # home-manager for cross-platform user configuration
+    home-manager = {
+	url = "github:nix-community/home-manager";
+	inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."mbpro16".pkgs;
+    # NixOS profiles for different hardware
+    hardware.url = "github:nixos/nixos-hardware";
+
+    # TODO global theme?
+    # catppuccin.url = "github:catppuccin/nix"
+
   };
-}
+
+  # outputs
+  # -------
+  # quite literally defines the outputs of this flake
+  
+  # notes on defining the output function...
+
+  # - `self` is the current flake object, allowing self reference
+
+  # - defines specific inputs (self, darwin, home-manager) from the inputs set
+  # - `...` allows additional inputs which haven't been explicitly defined
+  # - `@inputs` ensures the entire inputs set is avaliable 
+
+  # - `let inherit (self) outputs;` binds outputs to self.outputs (quality of life)
+  outputs = {
+	self,
+	darwin,
+	home-manager,
+	nixpkgs,
+	nixpkgs-darwin,
+	...
+  } @ inputs: let
+  	inherit (self) outputs;
+  
+  # Global user configuration
+  users = {
+    mahoney = {
+      email = "mahoney@cmui.co.uk";
+      name = "mahoney";
+    };
+  };
+
+  # Function to generate system configuration with darwin & home-manager 
+  mkDarwinConfiguration = hostname: user: arch ? "aarch64-darwin":
+    # this fn is provided by nix-darwin to generate configurations
+    darwin.lib.darwinsystem {
+      system = arch;
+      # These are additional arguments to pass to the configuration
+      # 1. inherit inputs, outputs and hostname from the scope where the fn is called
+      # 2. use the user config defined in the users attribute set defined above
+      specialArgs = {
+        inherit inputs outputs hostname;
+	userConfig = users.${user};
+      };
+      # essentially imports, this fn generates a config from darwinsystem + modules
+      modules = [
+        ./hosts/${hostname}/configuration.nix
+	home-manager.darwinModules.home-manager
+      ];
+    };
+
+  # TODO Function to generate NixOS system configuration
+  mkNixosConfiguration = hostname: user:
+    nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs hostname;
+	userConfig = users.${user};
+      };
+      modules = [
+        ./hosts/${hostname}/configuration.nix
+      ];
+    };
+
+  # Function to generate Home Manager configuration
+  mkHomeMgrConfiguration = hostname: user: arch:
+    home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        system = arch;
+      };
+      # NOTE what is the difference between `specialArgs` & `extraSpecialArgs`? 
+      # There isn't... nix-darwin and home-manager use different naming conventions
+      # - `specialArgs` is uniq to nix-darwin,
+      # - `extraSpecialArgs` is uniq to home-manager
+      extraSpecialArgs = {
+        inherit inputs outputs;
+	userConfig = users.${user};
+      };
+      modules = [
+        ./home/${user}/${hostname}.nix
+	# catppuccin.HomeManagerModules.catppuccin
+      ];
+    };
+in {
+  
+  darwinConfigurations = {
+    # Macbook Pro 16 
+    "halcyon" = mkDarwinConfiguration "halcyon" "mahoney" "aarch64-darwin";
+  };
+  
+  nixosConfigurations = {
+    # TODO NixOS machine
+    "changeme" = mkNixosConfiguration "hostname" "user";
+  };
+
+  homeMgrConfigurations = {
+    "mahoney@halcyon" = mkHomeMgrConfiguration "halcyon" "mahoney" "aarch64-darwin";
+    # TODO nixOS
+  };
+};
+
