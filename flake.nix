@@ -73,10 +73,10 @@
   #     Essentially, inserting vars or expressions inside strings
 
   # Function to generate system configuration with darwin & home-manager 
-  mkDarwinConfiguration = hostname: user: arch ? "aarch64-darwin":
+  mkDarwinConfiguration = hostname: user:
     # this fn is provided by nix-darwin to generate configurations
     darwin.lib.darwinsystem {
-      system = arch;
+      system = "aarch64-darwin";
       # These are additional arguments to pass to the configuration
       # 1. inherit inputs, outputs and hostname from the scope where the fn is called
       # 2. use the user config defined in the users attribute set defined above
@@ -104,7 +104,7 @@
     };
 
   # Function to generate Home Manager configuration
-  mkHomeMgrConfiguration = hostname: user: arch;
+  mkHomeMgrConfiguration = hostname: user: arch:
     home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         system = arch;
@@ -128,7 +128,7 @@ in {
   darwinConfigurations = {
     # Macbook Pro 16 | halcyon
     # Call fn with hostname, user, arch  
-    "halcyon" = mkDarwinConfiguration "halcyon" "mahoney" "aarch64-darwin";
+    "halcyon" = mkDarwinConfiguration "halcyon" "mahoney";
   };
   
 #  nixosConfigurations = {
