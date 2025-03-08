@@ -17,21 +17,18 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
-      auto-optimise-store = true; # replaces identical files in the store with hard links
     };
     package = pkgs.nix;
     optimise.automatic = true;
   };
 
-  services.nix-daemon.enable = true;
-
-  users.user.${userConfig.name} = {
+  users.users.${userConfig.name} = {
     name = "${userConfig.name}";
     home = "/Users/${userConfig.name}";
   };
 
   # sudo auth with TouchID
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   
   # System settings
   # ---------------
@@ -45,7 +42,7 @@
       # Tick, Tock 
       menuExtraClock = {
         IsAnalog = true;
-        ShowDate = true;
+        ShowDate = 0;
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
@@ -60,7 +57,6 @@
         NSDocumentSaveNewDocumentsToCloud = false;
         NSNavPanelExpandedStateForSaveMode = true;
         PMPrintingExpandedStateForPrint = true;
-        AppleCUForce24HourTime = true;
       };
       LaunchServices = {
         LSQuarantine = false;
@@ -99,39 +95,22 @@
       };
       controlcenter = {
         BatteryShowPercentage = true;
-        Bluetooth = 18; # 18 = Show
-        Display = 18;
-        NowPlaying = 24; # 24 = Hide
-        Sound = 18;
+        Bluetooth = true; # 18 = Show
+        Display = true;
+        NowPlaying = false; # 24 = Hide
+        Sound = true;
       };
       screencapture = {
         location = "/Users/${userConfig.name}/Downloads/screencaps";
         type = "png";
         disable-shadow = true;
       };
+    WindowManager.EnableStandardClickToShowDesktop = false;
+    screensaver.askForPassword = true;
     };
     keyboard = {
       enableKeyMapping = true;
     };
-    WindowManager.EnableStandardClickToShowDesktop = false;
-    screensaver.AskForPassword = true;
-  };
-
-
-  # Packages
-#  environment.systemPackages = with pkgs; [
-#    fd
-#    jq
-#    ripgrep
-#  ];
-
-  # TODO: zsh config 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableFzfCompletion = true;
-    enableFzfHistory = true;
-    enableSyntaxHighlighting = true;
   };
 
   fonts.packages = with pkgs; [
