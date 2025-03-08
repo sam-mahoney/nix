@@ -64,7 +64,7 @@
   users = {
     mahoney = {
       email = "mahoney@cmui.co.uk";
-      fullName = "Sam Mahoney"
+      fullName = "Sam Mahoney";
       name = "mahoney";
     };
   };
