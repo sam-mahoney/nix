@@ -19,15 +19,15 @@
      
     # NOTE `inputs.nixpkgs.follows` allows us to reuse an already defined input
     darwin = {
-	url = "github:LnL7/nix-darwin";
-	inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      };
   
     # home-manager for cross-platform user configuration
     home-manager = {
-	url = "github:nix-community/home-manager";
-	inputs.nixpkgs.follows = "nixpkgs";
-    };
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      };
 
     # NixOS profiles for different hardware
     hardware.url = "github:nixos/nixos-hardware";
@@ -64,9 +64,13 @@
   users = {
     mahoney = {
       email = "mahoney@cmui.co.uk";
+      fullName = "Sam Mahoney"
       name = "mahoney";
     };
   };
+
+  # [!] Note, "${}" is used for string interpolation in nix
+  #     Essentially, inserting vars or expressions inside strings
 
   # Function to generate system configuration with darwin & home-manager 
   mkDarwinConfiguration = hostname: user: arch ? "aarch64-darwin":
@@ -83,7 +87,7 @@
       # essentially imports, this fn generates a config from darwinsystem + modules
       modules = [
         ./hosts/${hostname}/configuration.nix
-	home-manager.darwinModules.home-manager
+        home-manager.darwinModules.home-manager
       ];
     };
 
@@ -111,28 +115,30 @@
       # - `extraSpecialArgs` is uniq to home-manager
       extraSpecialArgs = {
         inherit inputs outputs;
-	userConfig = users.${user};
+        userConfig = users.${user};
+        homemgrModules = "${self}/modules/home-manager";
       };
       modules = [
-        ./home/${user}/${hostname}.nix
-	# catppuccin.HomeManagerModules.catppuccin
+        ./homemgr/${user}/${hostname}
+        # catppuccin.HomeManagerModules.catppuccin
       ];
     };
 in {
   
   darwinConfigurations = {
-    # Macbook Pro 16 
+    # Macbook Pro 16 | halcyon
+    # Call fn with hostname, user, arch  
     "halcyon" = mkDarwinConfiguration "halcyon" "mahoney" "aarch64-darwin";
   };
   
-  nixosConfigurations = {
-    # TODO NixOS machine
-    "changeme" = mkNixosConfiguration "hostname" "user";
-  };
+#  nixosConfigurations = {
+#    # TODO NixOS machine
+#    "changeme" = mkNixosConfiguration "hostname" "user";
+#  };
 
   homeMgrConfigurations = {
     "mahoney@halcyon" = mkHomeMgrConfiguration "halcyon" "mahoney" "aarch64-darwin";
-    # TODO nixOS
+    # TODO NixOS
+    };
   };
-};
-
+}
