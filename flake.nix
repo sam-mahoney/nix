@@ -12,15 +12,14 @@
     # https://discourse.nixos.org/t/differences-between-nix-channels/13998
     
     # NOTE as of 29/12/2024, 24.11 is the latest release
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
      
     # NOTE `inputs.nixpkgs.follows` allows us to reuse an already defined input
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
       };
   
     # home-manager for cross-platform user configuration
@@ -55,7 +54,6 @@
 	darwin,
 	home-manager,
 	nixpkgs,
-	nixpkgs-darwin,
 	...
   } @ inputs: let
   	inherit (self) outputs;
@@ -75,7 +73,7 @@
   # Function to generate system configuration with darwin & home-manager 
   mkDarwinConfiguration = hostname: user:
     # this fn is provided by nix-darwin to generate configurations
-    darwin.lib.darwinsystem {
+    darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       # These are additional arguments to pass to the configuration
       # 1. inherit inputs, outputs and hostname from the scope where the fn is called
@@ -86,7 +84,7 @@
       };
       # essentially imports, this fn generates a config from darwinsystem + modules
       modules = [
-        ./hosts/${hostname}/configuration.nix
+        ./machines/${hostname}/default.nix
         home-manager.darwinModules.home-manager
       ];
     };
@@ -99,7 +97,7 @@
 	userConfig = users.${user};
       };
       modules = [
-        ./hosts/${hostname}/configuration.nix
+        ./machines/${hostname}/default.nix
       ];
     };
 
