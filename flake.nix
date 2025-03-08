@@ -104,7 +104,7 @@
     };
 
   # Function to generate Home Manager configuration
-  mkHomeMgrConfiguration = hostname: user: arch:
+  mkHomeMgrConfiguration = hostname: user: arch;
     home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         system = arch;
