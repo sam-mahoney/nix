@@ -1,39 +1,19 @@
-{pkgs, ...}: {
-  # Install alacritty via home-manager module
+{ ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
-      general = {
-        live_config_reload = true;
-      };
-
-      terminal = {
-        shell.program = "zsh";
-        shell.args = [
-          "-l"
-          "-c"
-          "tmux attach || tmux "
-        ];
-      };
-
-      env = {
-        TERM = "xterm-256color";
-      };
-
       window = {
-        decorations =
-          if pkgs.stdenv.isDarwin
-          then "buttonless"
-          else "none";
-        dynamic_title = false;
+        opacity = 1;
+        dynamic_title = true;
         dynamic_padding = true;
+        decorations = "full";
         dimensions = {
-          columns = 170;
-          lines = 45;
+          lines = 0;
+          columns = 0;
         };
         padding = {
           x = 5;
-          y = 1;
+          y = 5;
         };
       };
 
@@ -42,36 +22,95 @@
         multiplier = 3;
       };
 
-      font = {
-        size =
-          if pkgs.stdenv.isDarwin
-          then 15
-          else 12;
+      mouse = { hide_when_typing = true; };
+
+      font = let fontname = "JetBrainsMono Nerd Font";
+      in {
         normal = {
-          family = "MesloLGS Nerd Font";
-          style = "Regular";
+          family = fontname;
+          style = "Light";
         };
         bold = {
-          family = "MesloLGS Nerd Font";
+          family = fontname;
           style = "Bold";
         };
         italic = {
-          family = "MesloLGS Nerd Font";
-          style = "Italic";
+          family = fontname;
+          style = "ExtraLight";
         };
-        bold_italic = {
-          family = "MesloLGS Nerd Font";
-          style = "Italic";
-        };
+        size = 14;
       };
+      cursor.style = "Block";
 
-      selection = {
-        semantic_escape_chars = '',│`|:"' ()[]{}<>'';
-        save_to_clipboard = true;
+      # catppuccin mocha
+      colors = {
+        primary = {
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+          dim_foreground = "#7f849c";
+          bright_foreground = "#cdd6f4";
+        };
+        cursor = {
+          text = "#1e1e2e";
+          cursor = "#f5e0dc";
+        };
+        vi_mode_cursor = {
+          text = "#1e1e2e";
+          cursor = "#b4befe";
+        };
+        search = {
+          matches = {
+            foreground = "#1e1e2e";
+            background = "#a6adc8";
+          };
+          focused_match = {
+            foreground = "#1e1e2e";
+            background = "#a6e3a1";
+          };
+        };
+        footer_bar = {
+          foreground = "#1e1e2e";
+          background = "#a6adc8";
+        };
+        hints = {
+          start = {
+            foreground = "#1e1e2e";
+            background = "#f9e2af";
+          };
+          end = {
+            foreground = "#1e1e2e";
+            background = "#a6adc8";
+          };
+        };
+        selection = {
+          text = "#1e1e2e";
+          background = "#f5e0dc";
+        };
+        normal = {
+          black = "#45475a";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#bac2de";
+        };
+        bright = {
+          black = "#585b70";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#a6adc8";
+        };
+        indexed_colors = [
+          { index = 16; color = "#fab387"; }
+          { index = 17; color = "#f5e0dc"; }
+        ];
       };
     };
   };
-
-  # Enable catppuccin theming for alacritty.
-  # catppuccin.alacritty.enable = true;
 }

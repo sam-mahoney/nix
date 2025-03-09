@@ -80,26 +80,26 @@
       # 2. use the user config defined in the users attribute set defined above
       specialArgs = {
         inherit inputs outputs hostname;
-	userConfig = users.${user};
-      };
-      # essentially imports, this fn generates a config from darwinsystem + modules
-      modules = [
-        ./machines/${hostname}
-        home-manager.darwinModules.home-manager
-      ];
-    };
+        userConfig = users.${user};
+        };
+        # essentially imports, this fn generates a config from darwinsystem + modules
+        modules = [
+          ./machines/${hostname}
+          home-manager.darwinModules.home-manager
+          ];
+        };
 
-  # TODO Function to generate NixOS system configuration
-  mkNixosConfiguration = hostname: user:
-    nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs outputs hostname;
-	userConfig = users.${user};
-      };
-      modules = [
-        ./machines/${hostname}/default.nix
-      ];
-    };
+    # TODO Function to generate NixOS system configuration
+    mkNixosConfiguration = hostname: user:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${user};
+          };
+          modules = [
+            ./machines/${hostname}/default.nix
+            ];
+          };
 
   # Function to generate Home Manager configuration
   mkHomeMgrConfiguration = hostname: user: system:
@@ -110,7 +110,7 @@
       # - `specialArgs` is uniq to nix-darwin,
       # - `extraSpecialArgs` is uniq to home-manager
       extraSpecialArgs = {
-        inherit inputs outputs;
+        inherit inputs outputs hostname;
         userConfig = users.${user};
         homemgrModules = "${self}/modules/home-manager";
       };

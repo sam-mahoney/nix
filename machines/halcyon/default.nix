@@ -3,6 +3,7 @@
   outputs,
   userConfig,
   config,
+  hostname,
   ...
 }: {
 
@@ -18,9 +19,16 @@
     };
   };
 
+  networking = {
+    computerName = hostname;
+    hostName = hostname;
+    localHostName = hostname;
+  };
+
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
+      warn-dirty = false;
     };
     package = pkgs.nix;
     optimise.automatic = true;
@@ -124,6 +132,7 @@
   };
 
   fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
   ];
 
@@ -177,6 +186,13 @@
       ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
       done
     '';	
+
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

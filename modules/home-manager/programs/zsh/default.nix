@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  # Zsh shell configuration
+  # shell configuration
   programs.zsh = {
     enable = true;
     enableCompletion = true;
