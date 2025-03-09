@@ -3,7 +3,11 @@
   userConfig,
   pkgs,
   ...
-}: {
+}: 
+let
+  logseq-patch = pkgs.logseq.override { electron = pkgs.electron_34; };
+in
+{
   # stuff with additional config
   imports = [
     ../programs/alacritty
@@ -24,6 +28,9 @@
 
   # Nixpkgs configuration
   nixpkgs = {
+    overlays = [
+      outputs.overlays.stable-packages
+    ];
     config = {
       allowUnfree = true;
     };
@@ -40,10 +47,12 @@
   # Install common packages
   home.packages = with pkgs;
     [
+      # 1password currently broken on nix-darwin | installed with brew
+      # _1password
+      # _1password-gui
       anki-bin
-      _1password-gui
-      logseq # should be in programs?
       firefox # ^^
+      # https://nixos.wiki/wiki/Logseq | installed with brew
       # aerospace | brew vs nixpkgs:unstable
       dig
       fd
@@ -58,7 +67,7 @@
       eza
       du-dust
       vscode
-    ];
+    ]
     ++ lib.optionals stdenv.isDarwin [
       iina
       hidden-bar

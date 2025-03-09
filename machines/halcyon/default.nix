@@ -9,6 +9,9 @@
   # -----------------
 
   nixpkgs = {
+    overlays = [
+      outputs.overlays.stable-packages
+    ];
     config = {
       allowUnfree = true; # allow non-opensource pkgs
     };
@@ -95,9 +98,9 @@
       };
       controlcenter = {
         BatteryShowPercentage = true;
-        Bluetooth = true; # 18 = Show
+        Bluetooth = true;
         Display = true;
-        NowPlaying = false; # 24 = Hide
+        NowPlaying = false;
         Sound = true;
       };
       screencapture = {
@@ -130,7 +133,10 @@
       "wimlib" # windows imaging lib: https://wimlib.net/
     ];
     casks = [
+      "1password"
       "hammerspoon"
+      "logseq"
+      "anytype"
       "notion"
       "the-unarchiver"
       "nikitabobka/tap/aerospace"
@@ -142,6 +148,27 @@
     ];
     masApps = {};
   };
+ 
+  # https://github.com/elliottminns/dotfiles/blob/main/nix/darwin/flake.nix#L110C1-L128C12	
+  # system.activationScripts.applications.text = let
+    # env = pkgs.buildEnv {
+      # name = "system-applications";
+      # paths = config.environment.systemPackages;
+      # pathsToLink = "/Applications";
+    # };
+  # in
+    # pkgs.lib.mkForce ''
+      # # Set up applications.
+      # echo "setting up /Applications..." >&2
+      # rm -rf /Applications/Nix\ Apps
+      # mkdir -p /Applications/Nix\ Apps
+      # find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+      # while read -r src; do
+      # app_name=$(basename "$src")
+      # echo "copying $src" >&2
+      # ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+      # done
+    # '';	
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

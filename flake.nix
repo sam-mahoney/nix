@@ -84,7 +84,7 @@
       };
       # essentially imports, this fn generates a config from darwinsystem + modules
       modules = [
-        ./machines/${hostname}/default.nix
+        ./machines/${hostname}
         home-manager.darwinModules.home-manager
       ];
     };
@@ -102,11 +102,9 @@
     };
 
   # Function to generate Home Manager configuration
-  mkHomeMgrConfiguration = hostname: user: arch:
+  mkHomeMgrConfiguration = hostname: user: system:
     home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = arch;
-      };
+      pkgs = import nixpkgs {inherit system;};
       # NOTE what is the difference between `specialArgs` & `extraSpecialArgs`? 
       # There isn't... nix-darwin and home-manager use different naming conventions
       # - `specialArgs` is uniq to nix-darwin,
@@ -122,21 +120,20 @@
       ];
     };
 in {
-  
   darwinConfigurations = {
     # Macbook Pro 16 | halcyon
     # Call fn with hostname, user, arch  
     "halcyon" = mkDarwinConfiguration "halcyon" "mahoney";
   };
-  
 #  nixosConfigurations = {
 #    # TODO NixOS machine
 #    "changeme" = mkNixosConfiguration "hostname" "user";
 #  };
-
-  homeMgrConfigurations = {
+  homeConfigurations = {
     "mahoney@halcyon" = mkHomeMgrConfiguration "halcyon" "mahoney" "aarch64-darwin";
     # TODO NixOS
     };
+
+  overlays = import ./overlays {inherit inputs;};
   };
 }

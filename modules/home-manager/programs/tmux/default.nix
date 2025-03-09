@@ -60,3 +60,4 @@
       bind-key -T copy-mode-vi 'C-l' select-pane -R
     '';
   };
+}
