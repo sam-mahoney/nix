@@ -4,9 +4,6 @@
   pkgs,
   ...
 }: 
-let
-  logseq-patch = pkgs.logseq.override { electron = pkgs.electron_34; };
-in
 {
   # stuff with additional config
   imports = [
@@ -51,7 +48,7 @@ in
       # _1password
       # _1password-gui
       anki-bin
-      firefox # ^^
+      # firefox # ^^
       # https://nixos.wiki/wiki/Logseq | installed with brew
       # aerospace | brew vs nixpkgs:unstable
       dig
@@ -67,6 +64,9 @@ in
       eza
       du-dust
       vscode
+      spotify
+      wget
+      nmap
     ]
     ++ lib.optionals stdenv.isDarwin [
       iina

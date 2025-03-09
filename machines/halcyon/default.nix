@@ -2,6 +2,7 @@
   pkgs,
   outputs,
   userConfig,
+  config,
   ...
 }: {
 
@@ -38,6 +39,10 @@
   # nix-darwin options: https://mynixos.com/nix-darwin/options/system
   # *Incomplete* list of macOS defaults: https://macos-defaults.com/
   system = {
+    keyboard = {
+      remapCapsLockToControl = true;
+      enableKeyMapping = true;
+    };
     defaults = {
       CustomUserPreferences = {
         NSGlobalDomain."com.apple.mouse.linear" = true;
@@ -66,7 +71,6 @@
       };
       trackpad = {
         TrackpadRightClick = true;
-        TrackpadThreeFingerDrag = true;
         Clicking = true;
       };
       finder = {
@@ -90,6 +94,8 @@
         showhidden = true;
         persistent-apps = [];
         tilesize = 56;
+        # areospace
+        expose-group-apps = true;
         # disable "hot corner" actions
         wvous-bl-corner = 1;
         wvous-br-corner = 1;
@@ -103,6 +109,10 @@
         NowPlaying = false;
         Sound = true;
       };
+      # areospace | https://nikitabobko.github.io/AeroSpace/guide.html#a-note-on-displays-have-separate-spaces
+      spaces = {
+        spans-displays = true;
+      };
       screencapture = {
         location = "/Users/${userConfig.name}/Downloads/screencaps";
         type = "png";
@@ -110,9 +120,6 @@
       };
     WindowManager.EnableStandardClickToShowDesktop = false;
     screensaver.askForPassword = true;
-    };
-    keyboard = {
-      enableKeyMapping = true;
     };
   };
 
@@ -138,6 +145,7 @@
       "logseq"
       "anytype"
       "notion"
+      "firefox"
       "the-unarchiver"
       "nikitabobka/tap/aerospace"
       "balenaetcher"
@@ -150,25 +158,25 @@
   };
  
   # https://github.com/elliottminns/dotfiles/blob/main/nix/darwin/flake.nix#L110C1-L128C12	
-  # system.activationScripts.applications.text = let
-    # env = pkgs.buildEnv {
-      # name = "system-applications";
-      # paths = config.environment.systemPackages;
-      # pathsToLink = "/Applications";
-    # };
-  # in
-    # pkgs.lib.mkForce ''
-      # # Set up applications.
-      # echo "setting up /Applications..." >&2
-      # rm -rf /Applications/Nix\ Apps
-      # mkdir -p /Applications/Nix\ Apps
-      # find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-      # while read -r src; do
-      # app_name=$(basename "$src")
-      # echo "copying $src" >&2
-      # ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-      # done
-    # '';	
+  system.activationScripts.applications.text = let
+    env = pkgs.buildEnv {
+      name = "system-applications";
+      paths = config.environment.systemPackages;
+      pathsToLink = "/Applications";
+    };
+  in
+    pkgs.lib.mkForce ''
+      # Set up applications.
+      echo "setting up /Applications..." >&2
+      rm -rf /Applications/Nix\ Apps
+      mkdir -p /Applications/Nix\ Apps
+      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+      while read -r src; do
+      app_name=$(basename "$src")
+      echo "copying $src" >&2
+      ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+      done
+    '';	
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
