@@ -39,7 +39,7 @@
     [mode.main.binding]
     # Launch applications
     alt-shift-enter = 'exec-and-forget open -na alacritty'
-    alt-shift-b = 'exec-and-forget open -a "firefox"'
+    alt-shift-b = 'exec-and-forget open -a firefox'
     alt-shift-f = 'exec-and-forget open -a Finder'
 
     # Window management
@@ -75,7 +75,7 @@
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
     # Move to secondary 
-    alt-0 = 'wokespace 0'
+    alt-0 = 'workspace 10'
 
     # Move windows to workspaces
     alt-shift-1 = 'move-node-to-workspace 1'
