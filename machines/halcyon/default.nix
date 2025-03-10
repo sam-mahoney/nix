@@ -47,9 +47,20 @@
   # nix-darwin options: https://mynixos.com/nix-darwin/options/system
   # *Incomplete* list of macOS defaults: https://macos-defaults.com/
   system = {
+    startup.chime = false;
+    # Use AUS > UK keyboard layout - it's the same as UK but with a sane # keymap 
+    # https://apple.stackexchange.com/a/361992
     keyboard = {
-      remapCapsLockToControl = true;
+      remapCapsLockToEscape = true;
+      swapLeftCommandAndLeftAlt = true;
       enableKeyMapping = true;
+      userKeyMapping = [
+        {
+          # Remap §± to ~
+          HIDKeyboardModifierMappingDst = 30064771125;
+          HIDKeyboardModifierMappingSrc = 30064771172;
+        }
+      ];
     };
     defaults = {
       CustomUserPreferences = {
@@ -62,6 +73,7 @@
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
+        AppleKeyboardUIMode = 3;
         ApplePressAndHoldEnabled = false;
         AppleShowAllExtensions = true;
         KeyRepeat = 2;
@@ -155,6 +167,7 @@
       "anytype"
       "notion"
       "firefox"
+      "spotify"
       "the-unarchiver"
       "nikitabobka/tap/aerospace"
       "balenaetcher"

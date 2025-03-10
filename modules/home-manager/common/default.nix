@@ -64,7 +64,6 @@
       eza
       du-dust
       vscode
-      spotify
       wget
       nmap
     ]
