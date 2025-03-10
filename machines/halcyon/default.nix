@@ -52,7 +52,7 @@
     # https://apple.stackexchange.com/a/361992
     keyboard = {
       remapCapsLockToEscape = true;
-      swapLeftCommandAndLeftAlt = true;
+      # swapLeftCommandAndLeftAlt = true;
       enableKeyMapping = true;
       userKeyMapping = [
         {
