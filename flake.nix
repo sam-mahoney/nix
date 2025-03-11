@@ -124,13 +124,17 @@ in {
     # Macbook Pro 16 | halcyon
     # Call fn with hostname, user, arch  
     "halcyon" = mkDarwinConfiguration "halcyon" "mahoney";
+    "helios" = mkDarwinConfiguration "helios" "mahoney";
   };
 #  nixosConfigurations = {
 #    # TODO NixOS machine
 #    "changeme" = mkNixosConfiguration "hostname" "user";
 #  };
   homeConfigurations = {
+    # MBP 16 (Personal)
     "mahoney@halcyon" = mkHomeMgrConfiguration "halcyon" "mahoney" "aarch64-darwin";
+    # MBP 14 (Work)
+    "mahoney@helios" = mkHomeMgrConfiguration "helios" "mahoney" "aarch64-darwin";
     # TODO NixOS
     };
 
