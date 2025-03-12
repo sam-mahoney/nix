@@ -28,12 +28,12 @@
 
     # Gaps settings
     [gaps]
-    inner.horizontal = 6
-    inner.vertical =   6
-    outer.left =       6
-    outer.bottom =     6
-    outer.top =        6
-    outer.right =      6
+    inner.horizontal = 7
+    inner.vertical =   7
+    outer.left =       7
+    outer.bottom =     7
+    outer.top =        7
+    outer.right =      7
 
     # Main mode bindings
     [mode.main.binding]
@@ -114,8 +114,17 @@
     alt-shift-l = ['join-with right', 'mode main']
 
     # Window detection rules
-    # [[on-window-detected]]
-    # if.app-id = 'org.alacritty'
-    # run = 'move-node-to-workspace 2'
+    [[on-window-detected]]
+    if.app-id = 'org.alacritty'
+    run = 'move-node-to-workspace 2'
+
+    [[on-window-detected]]
+    if.app-id = 'org.mozilla.firefox'
+    run = 'move-node-to-workspace 3'
+
+    [[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 0'
+
   '';
 }

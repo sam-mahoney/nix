@@ -64,6 +64,7 @@
       menuExtraClock = {
         IsAnalog = true;
         ShowDate = 1;
+	ShowDayOfMonth = true;
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";

@@ -66,6 +66,9 @@
       vscode
       wget
       nmap
+      # Beacon Stuff
+      ssm-session-manager-plugin
+      #vagrant # currently breaks build 
     ]
     ++ lib.optionals stdenv.isDarwin [
       iina
