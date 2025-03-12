@@ -123,7 +123,7 @@
         NowPlaying = false;
         Sound = true;
       };
-      # areospace | https://nikitabobko.github.io/AeroSpace/guide.html#a-note-on-displays-have-separate-spaces
+      # aerospace | https://nikitabobko.github.io/AeroSpace/guide.html#a-note-on-displays-have-separate-spaces
       spaces = {
         spans-displays = true;
       };
@@ -160,7 +160,7 @@
       "firefox"
       "spotify"
       "the-unarchiver"
-      "nikitabobka/tap/aerospace"
+      "nikitabobko/tap/aerospace"
     ];
     taps = [
       "nikitabobko/tap"

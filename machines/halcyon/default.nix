@@ -169,7 +169,7 @@
       "firefox"
       "spotify"
       "the-unarchiver"
-      "nikitabobka/tap/aerospace"
+      "nikitabobko/tap/aerospace"
       "balenaetcher"
       "cold-turkey-blocker"
     ];
