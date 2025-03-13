@@ -80,6 +80,7 @@
         NSDocumentSaveNewDocumentsToCloud = false;
         NSNavPanelExpandedStateForSaveMode = true;
         PMPrintingExpandedStateForPrint = true;
+	"com.apple.sound.beep.volume" = 0.000; # mute system sounds
       };
       LaunchServices = {
         LSQuarantine = false;
