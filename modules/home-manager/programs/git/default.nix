@@ -19,7 +19,7 @@
       };
     };
     extraConfig = {
-      pull.rebase = "true";
+      pull.rebase = "false";
     };
   };
 
