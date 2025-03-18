@@ -68,7 +68,8 @@
       nmap
       # Beacon Stuff
       ssm-session-manager-plugin
-      #vagrant # currently breaks build 
+      #vagrant # currently breaks build
+      findutils
     ]
     ++ lib.optionals stdenv.isDarwin [
       iina

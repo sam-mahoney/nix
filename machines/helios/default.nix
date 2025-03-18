@@ -160,6 +160,7 @@
       "logseq"
       "anytype"
       "firefox"
+      "google-chrome"
       "spotify"
       "the-unarchiver"
       "nikitabobko/tap/aerospace"

@@ -2,7 +2,10 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+  #let zshrc = "${builtins.getEnv "HOME"}/dotfiles/dot-zshrc";
+#in
+  {
   # shell configuration
   programs.zsh = {
     enable = true;
@@ -41,11 +44,11 @@
       # la = "eza -abhl --icons --group-directories-first"; # all list
       # lt = "eza --tree --level=2 --icons"; # tree
     };
-    #initExtra = ''
-    #  # open commands in $EDITOR with C-e
-    #  autoload -z edit-command-line
-    #  zle -N edit-command-line
-    #  bindkey "^v" edit-command-line
-    #  '';
+    initExtra = ''
+      # open commands in $EDITOR with C-e
+      #autoload -z edit-command-line
+      #zle -N edit-command-line
+      #bindkey "^v" edit-command-line
+      '';
   };
 }
