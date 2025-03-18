@@ -154,6 +154,8 @@
     };
     brews = [
       "mas" # Mac App Store CLI
+      "tfenv"
+      "coreutils"
     ];
     casks = [
       "hammerspoon"
@@ -164,8 +166,10 @@
       "spotify"
       "the-unarchiver"
       "nikitabobko/tap/aerospace"
+      "hashicorp/tap/hashicorp-vagrant"
     ];
     taps = [
+      "hashicorp/tap"
       "nikitabobko/tap"
     ];
     masApps = {};

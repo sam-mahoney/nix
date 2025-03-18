@@ -68,10 +68,13 @@
       nmap
       # Beacon Stuff
       ssm-session-manager-plugin
+      azure-cli
       #vagrant # currently breaks build
-      findutils
+      keybase
+      ctags
     ]
     ++ lib.optionals stdenv.isDarwin [
+      findutils
       iina
       hidden-bar
       colima # Run docker on MacOS (w/o Docker Desktop) using Lima, a minimal Linux VM
