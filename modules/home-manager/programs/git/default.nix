@@ -25,7 +25,7 @@
       {
         path = "~/code/beacon/.gitconfig-beacon";
 	condition = "gitdir:~/code/beacon/**";
-      };
+      }
     ];
   };
 
