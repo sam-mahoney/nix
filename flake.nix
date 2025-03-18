@@ -57,7 +57,8 @@
 	...
   } @ inputs: let
   	inherit (self) outputs;
-  
+
+  formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
   # Global user configuration
   users = {
     mahoney = {

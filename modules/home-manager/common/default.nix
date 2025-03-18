@@ -66,6 +66,7 @@
       vscode
       wget
       nmap
+      nixfmt-rfc-style
       # Beacon Stuff
       ssm-session-manager-plugin
       azure-cli

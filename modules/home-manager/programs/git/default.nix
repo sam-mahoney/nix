@@ -21,6 +21,12 @@
     extraConfig = {
       pull.rebase = "false";
     };
+    includes = [
+      {
+        path = "~/code/beacon/.gitconfig-beacon";
+	condition = "gitdir:~/code/beacon/**";
+      };
+    ];
   };
 
   # Enable catppuccin theming for git delta
