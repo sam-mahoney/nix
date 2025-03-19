@@ -30,6 +30,7 @@
       ggl = "git pull";
       ggp = "git push";
 
+      gcd="cd $(git rev-parse --show-toplevel)";
       # TODO 
       # repo = "cd $HOME/Documents/repositories";
       temp = "cd $HOME/Downloads/temp";

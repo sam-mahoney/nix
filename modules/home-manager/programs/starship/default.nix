@@ -10,6 +10,12 @@
       aws = {
         disabled = false;
         };
+      command_timeout = 10000;
+      character = {
+	success_symbol = "[➜](bold green)";
+	error_symbol = "[➜](bold red)";
+	vimcmd_symbol = "[V](bold blue)";
+      };
     };
   };
   # Enable catppuccin theming for starship.
