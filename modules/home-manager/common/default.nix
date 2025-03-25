@@ -10,6 +10,7 @@
     ../programs/alacritty
     ../programs/atuin
     ../programs/bat
+    ../programs/direnv
     ../programs/fzf
     ../programs/git
     ../programs/go
