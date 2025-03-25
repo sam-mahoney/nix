@@ -45,9 +45,9 @@
     # Use AUS > UK keyboard layout - it's the same as UK but with a sane # keymap 
     # https://apple.stackexchange.com/a/361992
     keyboard = {
-      remapCapsLockToEscape = true;
       # swapLeftCommandAndLeftAlt = true;
       enableKeyMapping = true;
+      remapCapsLockToEscape = true;
       userKeyMapping = [
         {
           # Remap §± to ~
@@ -165,6 +165,7 @@
       "google-chrome"
       "spotify"
       "the-unarchiver"
+      "virtualbox"
       "nikitabobko/tap/aerospace"
       "hashicorp/tap/hashicorp-vagrant"
     ];
