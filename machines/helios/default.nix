@@ -41,6 +41,7 @@
   # nix-darwin options: https://mynixos.com/nix-darwin/options/system
   # *Incomplete* list of macOS defaults: https://macos-defaults.com/
   system = {
+    primaryUser = "${userConfig.name}";
     startup.chime = false;
     # Use AUS > UK keyboard layout - it's the same as UK but with a sane # keymap 
     # https://apple.stackexchange.com/a/361992
@@ -168,6 +169,7 @@
       "virtualbox"
       "nikitabobko/tap/aerospace"
       "hashicorp/tap/hashicorp-vagrant"
+      "1password"
     ];
     taps = [
       "hashicorp/tap"

@@ -74,6 +74,8 @@
       #vagrant # currently breaks build
       keybase
       ctags
+      ollama
+      osv-scanner
     ]
     ++ lib.optionals stdenv.isDarwin [
       findutils

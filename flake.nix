@@ -13,7 +13,7 @@
     
     # NOTE as of 29/12/2024, 24.11 is the latest release
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
      
     # NOTE `inputs.nixpkgs.follows` allows us to reuse an already defined input
