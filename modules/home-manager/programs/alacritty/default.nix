@@ -1,77 +1,45 @@
 { ... }: {
   programs.alacritty = {
     enable = true;
+
     settings = {
+      env = {
+        TERM = "xterm-256color";
+      };
+
       window = {
-        opacity = 1;
-        dynamic_title = true;
-        dynamic_padding = true;
-        decorations = "full";
-        dimensions = {
-          lines = 0;
-          columns = 0;
-        };
-        padding = {
-          x = 5;
-          y = 5;
-        };
+        opacity = 1.0;
+        padding = { x = 6; y = 6; };
+        dynamic_padding = false;
+        decorations = "none"; # minimal UI
       };
 
-      scrolling = {
-        history = 10000;
-        multiplier = 3;
-      };
-
-      mouse = { hide_when_typing = true; };
-
-      font = let fontname = "JetBrainsMono Nerd Font";
-      in {
+      font = {
         normal = {
-          family = fontname;
-          style = "Light";
+          family = "BlexMono Nerd Font";
+          style = "Regular";
         };
         bold = {
-          family = fontname;
+          family = "BlexMono Nerd Font";
           style = "Bold";
         };
-        italic = {
-          family = fontname;
-          style = "ExtraLight";
-        };
-        size = 14;
+        size = 12.5;
+        offset = { x = 0; y = 1; };
       };
-      cursor.style = "Block";
+	
+      mouse = { hide_when_typing = true; };
 
-      # catppuccin mocha
       colors = {
         primary = {
-          background = "#1e1e2e";
-          foreground = "#cdd6f4";
-          dim_foreground = "#7f849c";
-          bright_foreground = "#cdd6f4";
+          background = "#0f1112"; # Matte Black Steel
+          foreground = "#c0c0c0"; # Gunmetal Silver
         };
+
         cursor = {
-          text = "#1e1e2e";
-          cursor = "#f5e0dc";
+          text = "CellBackground";
+          cursor = "#ffcc00"; # Amber Torch
         };
-        vi_mode_cursor = {
-          text = "#1e1e2e";
-          cursor = "#b4befe";
-        };
-        search = {
-          matches = {
-            foreground = "#1e1e2e";
-            background = "#a6adc8";
-          };
-          focused_match = {
-            foreground = "#1e1e2e";
-            background = "#a6e3a1";
-          };
-        };
-        footer_bar = {
-          foreground = "#1e1e2e";
-          background = "#a6adc8";
-        };
+
         hints = {
           start = {
             foreground = "#1e1e2e";
@@ -82,35 +50,37 @@
             background = "#a6adc8";
           };
         };
-        selection = {
-          text = "#1e1e2e";
-          background = "#f5e0dc";
-        };
+
         normal = {
-          black = "#45475a";
-          red = "#f38ba8";
-          green = "#a6e3a1";
-          yellow = "#f9e2af";
-          blue = "#89b4fa";
-          magenta = "#f5c2e7";
-          cyan = "#94e2d5";
-          white = "#bac2de";
+          black   = "#0f1112";  # same as background
+          red     = "#ff0033";  # Industrial Red
+          green   = "#33ff00";  # Toxic Green
+          yellow  = "#ffcc00";  # Amber
+          blue    = "#00aaff";  # Arc Weld Blue
+          magenta = "#cc66ff";  # UV Plasma
+          cyan    = "#00ffcc";  # Hacker Cyan
+          white   = "#f5f5f5";  # Ash White
         };
+
         bright = {
-          black = "#585b70";
-          red = "#f38ba8";
-          green = "#a6e3a1";
-          yellow = "#f9e2af";
-          blue = "#89b4fa";
-          magenta = "#f5c2e7";
-          cyan = "#94e2d5";
-          white = "#a6adc8";
+          black   = "#1a1c1e";
+          red     = "#ff3344";
+          green   = "#66ff33";
+          yellow  = "#ffee00";
+          blue    = "#33ccff";
+          magenta = "#dd88ff";
+          cyan    = "#66ffe0";
+          white   = "#ffffff";
         };
-        indexed_colors = [
-          { index = 16; color = "#fab387"; }
-          { index = 17; color = "#f5e0dc"; }
-        ];
+      };
+
+      cursor.style = "Block";
+
+      scrolling = {
+        history = 10000;
+        multiplier = 3;
       };
     };
   };
 }
+

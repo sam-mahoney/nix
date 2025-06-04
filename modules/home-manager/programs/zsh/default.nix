@@ -45,11 +45,12 @@
       # la = "eza -abhl --icons --group-directories-first"; # all list
       # lt = "eza --tree --level=2 --icons"; # tree
     };
-    initExtra = ''
+    initContent = ''
       # open commands in $EDITOR with C-e
       #autoload -z edit-command-line
       #zle -N edit-command-line
       #bindkey "^v" edit-command-line
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#4444ff'
       '';
   };
 }

@@ -4,16 +4,13 @@
     enableZshIntegration = true;
     settings = {
       add_newline = false;
-      directory = {
-        style = "bold lavender";
-      };
       aws = {
         disabled = false;
         };
       command_timeout = 10000;
       character = {
-	success_symbol = "[➜](bold green)";
-	error_symbol = "[➜](bold red)";
+	success_symbol = "[>>>](bold green)";
+	error_symbol = "[>>>](bold red)";
 	vimcmd_symbol = "[V](bold blue)";
       };
     };
