@@ -20,6 +20,7 @@
     };
     extraConfig = {
       pull.rebase = "true";
+      format.pretty = "%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold green)<%an>%Creset";
     };
     includes = [
       {

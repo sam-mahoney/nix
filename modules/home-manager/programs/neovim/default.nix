@@ -4,7 +4,11 @@
     defaultEditor = true;
     withNodeJs = true;
     withPython3 = true;
-
+	
+    plugins = with pkgs.vimPlugins; [
+    	nvim-lspconfig
+    	nvim-treesitter.withAllGrammars
+    ];
     # TODO kickstart
     #extraPackages = with pkgs; [
     #  alejandra
