@@ -22,7 +22,42 @@ TODO
 
 ## Usage
 
-TODO
+TODO: initial install...
+
+<https://github.com/DeterminateSystems/nix-installer>
+
+Select `no` when asked if you want to use the special determine version
+
+Install `brew`
+
+disable `brew` analytics
+
+```(bash)
+brew analytics off
+```
+
+```bash
+nix run nix-darwin --switch --flake .#system
+```
+
+```bash
+nix-shell -p home-manager
+home-manager switch --flake .#user@system
+```
+
+
+```(bash)
+nix flake update
+```
+
+```(bash)
+darwin-rebuild switch --flake .#halcyon
+```
+
+```(bash)
+nix-shell -p home-manager
+home-manager switch --flake .#mahoney@halcyon
+```
 
 ## Nix things to remember
 

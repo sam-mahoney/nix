@@ -71,7 +71,6 @@
       # Beacon Stuff
       ssm-session-manager-plugin
       azure-cli
-      #vagrant # currently breaks build
       keybase
       ctags
       ollama

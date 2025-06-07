@@ -173,6 +173,9 @@
       "nikitabobko/tap/aerospace"
       "balenaetcher"
       "cold-turkey-blocker"
+      "discord"
+      "transmission"
+      "jellyfin"
     ];
     taps = [
       "nikitabobko/tap"
