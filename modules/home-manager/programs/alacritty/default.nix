@@ -23,6 +23,10 @@
           family = "BlexMono Nerd Font";
           style = "Bold";
         };
+	italic = {
+	  family = "BlexMono Nerd Font";
+	  style = "Italic";
+	};
         size = 12.5;
         offset = { x = 0; y = 1; };
       };
