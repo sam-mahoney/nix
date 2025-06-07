@@ -19,7 +19,7 @@
       };
     };
     extraConfig = {
-      pull.rebase = "false";
+      pull.rebase = "true";
     };
     includes = [
       {

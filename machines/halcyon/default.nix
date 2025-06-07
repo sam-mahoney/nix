@@ -145,6 +145,8 @@
   };
 
   fonts.packages = with pkgs; [
+    nerd-fonts.blex-mono
+    nerd-fonts.departure-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
   ];
