@@ -75,6 +75,8 @@
       ctags
       ollama
       osv-scanner
+      wireshark # includes tshark
+      termshark
     ]
     ++ lib.optionals stdenv.isDarwin [
       findutils
