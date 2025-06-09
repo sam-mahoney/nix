@@ -34,6 +34,9 @@
       # TODO 
       # repo = "cd $HOME/Documents/repositories";
       temp = "cd $HOME/Downloads/temp";
+	
+      # fzf directories in 'code' and cd into selected 
+      ccd = "cd $(find $HOME/code/ * -type d | fzf)";
 
       v = "nvim";
       vi = "nvim";
