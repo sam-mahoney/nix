@@ -116,15 +116,20 @@
     # Window detection rules
     [[on-window-detected]]
     if.app-id = 'org.alacritty'
-    run = 'move-node-to-workspace 2'
+    run = 'move-node-to-workspace 1'
+    
+    [[on-window-detected]]
+    if.app-id = 'org.logseq'
+    run = 'move-node-to-workspace 3'
+
 
     [[on-window-detected]]
     if.app-id = 'org.mozilla.firefox'
-    run = 'move-node-to-workspace 3'
+    run = 'move-node-to-workspace 4'
 
     [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace 0'
+    run = 'move-node-to-workspace 9'
 
   '';
 }
