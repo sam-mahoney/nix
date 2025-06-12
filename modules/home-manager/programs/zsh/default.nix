@@ -36,7 +36,7 @@
       temp = "cd $HOME/Downloads/temp";
 	
       # fzf directories in 'code' and cd into selected 
-      ccd = "cd $(find $HOME/code/ * -type d | fzf)";
+      ccd = "cd $(find $HOME/code/ -type d | fzf)";
 
       v = "nvim";
       vi = "nvim";
@@ -48,12 +48,14 @@
       # la = "eza -abhl --icons --group-directories-first"; # all list
       # lt = "eza --tree --level=2 --icons"; # tree
     };
-    initContent = ''
+    initContent = (''
       # open commands in $EDITOR with C-e
       #autoload -z edit-command-line
       #zle -N edit-command-line
       #bindkey "^v" edit-command-line
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#4444ff'
-      '';
+      ''
+      + builtins.readFile ./functions.sh
+      );
   };
 }
