@@ -178,6 +178,7 @@
       "discord"
       "transmission"
       "jellyfin"
+      "little-snitch"
     ];
     taps = [
       "nikitabobko/tap"
