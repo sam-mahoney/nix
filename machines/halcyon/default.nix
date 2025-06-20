@@ -180,6 +180,8 @@
       "jellyfin"
       "little-snitch"
       "mullvad-vpn"
+      "blockblock"
+      "knockknock"
     ];
     taps = [
       "nikitabobko/tap"
