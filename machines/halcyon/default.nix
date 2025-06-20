@@ -179,6 +179,7 @@
       "transmission"
       "jellyfin"
       "little-snitch"
+      "mullvad-vpn"
     ];
     taps = [
       "nikitabobko/tap"
