@@ -172,6 +172,7 @@
       "nikitabobko/tap/aerospace"
       "hashicorp/tap/hashicorp-vagrant"
       "1password"
+      "mullvad-vpn"
     ];
     taps = [
       "hashicorp/tap"
