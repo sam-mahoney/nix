@@ -9,7 +9,8 @@
       search_mode = "skim";
       secrets_filter = true;
       style = "compact";
+      keymap_mode = "vim-normal";
     };
-    flags = ["--disable-up-arrow"];
+    # flags = ["--disable-up-arrow"];
   };
 }
