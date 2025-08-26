@@ -70,7 +70,6 @@
       nixfmt-rfc-style
       # Beacon Stuff
       ssm-session-manager-plugin
-      azure-cli
       keybase
       ctags
       ollama
