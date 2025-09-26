@@ -8,7 +8,7 @@
       };
 
       window = {
-        opacity = 1.0;
+        opacity = 0.925;
         padding = { x = 6; y = 6; };
         dynamic_padding = false;
         decorations = "none"; # minimal UI
@@ -42,17 +42,6 @@
         cursor = {
           text = "CellBackground";
           cursor = "#ffcc00"; # Amber Torch
-        };
-
-        hints = {
-          start = {
-            foreground = "#1e1e2e";
-            background = "#f9e2af";
-          };
-          end = {
-            foreground = "#1e1e2e";
-            background = "#a6adc8";
-          };
         };
 
         normal = {
