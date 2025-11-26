@@ -63,18 +63,16 @@
       nh
       awscli2
       eza
-      du-dust
+      dust
       vscode
       wget
       nmap
       nixfmt-rfc-style
-      # Beacon Stuff
-      ssm-session-manager-plugin
-      keybase
       ctags
       ollama
       osv-scanner
-      wireshark # includes tshark
+      # wireshark # includes tshark
+      btop
       termshark
     ]
     ++ lib.optionals stdenv.isDarwin [
@@ -83,6 +81,7 @@
       hidden-bar
       colima # Run docker on MacOS (w/o Docker Desktop) using Lima, a minimal Linux VM
       docker
+      utm
     ];
 
     # TODO Theme?

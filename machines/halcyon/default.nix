@@ -177,7 +177,6 @@
       "cold-turkey-blocker"
       "discord"
       "transmission"
-      "jellyfin"
       "little-snitch"
       "mullvad-vpn"
       "blockblock"
