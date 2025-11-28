@@ -177,10 +177,11 @@
       "cold-turkey-blocker"
       "discord"
       "transmission"
-      "little-snitch"
+      #"little-snitch"
       "mullvad-vpn"
-      "blockblock"
-      "knockknock"
+      #"blockblock"
+      #"knockknock"
+      #"anki"
     ];
     taps = [
       "nikitabobko/tap"
