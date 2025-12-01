@@ -125,7 +125,6 @@ in {
     # Macbook Pro 16 | halcyon
     # Call fn with hostname, user, arch  
     "halcyon" = mkDarwinConfiguration "halcyon" "mahoney";
-    "helios" = mkDarwinConfiguration "helios" "mahoney";
   };
 #  nixosConfigurations = {
 #    # TODO NixOS machine
@@ -134,8 +133,8 @@ in {
   homeConfigurations = {
     # MBP 16 (Personal)
     "mahoney@halcyon" = mkHomeMgrConfiguration "halcyon" "mahoney" "aarch64-darwin";
-    # MBP 14 (Work)
-    "mahoney@helios" = mkHomeMgrConfiguration "helios" "mahoney" "aarch64-darwin";
+    # 5570, Ubuntu 24.04LTS (Work)
+    "mahoney@helios" = mkHomeMgrConfiguration "helios" "mahoney" "x86_64-linux";
     # TODO NixOS
     };
 
