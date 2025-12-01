@@ -1,6 +1,7 @@
 {
   outputs,
   userConfig,
+  config,
   pkgs,
   ...
 }:
